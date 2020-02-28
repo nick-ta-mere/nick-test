@@ -1,0 +1,13 @@
+<form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+  
+  <label>
+    Name:
+    <input type="text" formControlName="name">
+  </label>
+
+  <label>
+    baseInitiative:
+    <input type="text" formControlName="baseInitiative">
+  </label>
+<button type="submit" [disabled]="!characterForm.valid">Submit</button>
+</form>

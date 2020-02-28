@@ -1,0 +1,22 @@
+<div *ngIf="character">
+	<div>
+		<label>name:
+      <input [(ngModel)]="character.name" placeholder="name"/>
+    </label>
+	</div>
+	<div>
+		<label>Base Initiative:
+      <input [(ngModel)]="character.baseInitiative" placeholder="baseInitiative"/>
+    </label>
+	</div>
+	<div>
+		<label>Stun Damage:
+      <input [(ngModel)]="character.stunDamage" placeholder=""/>
+    </label>
+	</div>
+	<div>
+		<label>Physical Damage:
+      <input [(ngModel)]="character.physicalDamage" placeholder=""/>
+    </label>
+	</div>
+</div>

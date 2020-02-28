@@ -1,0 +1,19 @@
+<form [formGroup]="newCharacterForm" (ngSubmit)="onSubmit(newCharacterForm.value)"> 
+
+  <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="baseInitiative">
+      baseInitiative
+    </label>
+    <input id="baseInitiative" type="text" formControlName="baseInitiative">
+  </div>
+
+  <button class="button" type="submit">Add new character</button>
+
+</form>

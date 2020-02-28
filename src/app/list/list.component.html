@@ -1,0 +1,22 @@
+<table class="characters">
+	<thead>
+		<th>Initiative</th>
+		<th class="character-name">Name</th>
+		<th>baseInitiative</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let character of sortByInitiative(); index as characterId"
+			[class.selected]="character === selectedCharacter" >
+			<td>{{character.currentInitiative}}</td>
+			<td (click)="onSelect(character)">{{character.name}}</td>
+			<td>{{character.baseInitiative}}</td>
+			<!-- <td><button (click)="modifyInitiative(characterId, 5)">+5</button></td> -->
+			<!-- <td><button (click)="modifyInitiative(characterId, 1)">+1</button></td>
+      <td><button (click)="modifyInitiative(characterId, -1)">-1</button></td> -->
+			<td><button (click)="modifyInitiative(characterId, -5)">-5</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<br/>
+<app-character-detail [character]="selectedCharacter"></app-character-detail>
