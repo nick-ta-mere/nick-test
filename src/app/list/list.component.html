@@ -3,8 +3,8 @@
 		<th>Initiative</th>
 		<th class="character-name">Name</th>
 		<th>baseInitiative</th>
-	</thead>
-	<tbody>
+	<tbody *ngIf="charactersLoaded | async">
+
 		<tr *ngFor="let character of sortByInitiative(); index as characterId"
 			[class.selected]="character === selectedCharacter" >
 			<td>{{character.currentInitiative}}</td>

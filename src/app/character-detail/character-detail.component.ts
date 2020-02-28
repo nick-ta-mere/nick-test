@@ -26,9 +26,30 @@ export class CharacterDetailComponent implements OnInit {
     // this.location.back();
   }
 
-  save(): void {
+  showAddCharacterForm() {
+    this.character = {};
+  }
+
+  add(name: string, baseInitiative: number): void {
     this.characterService
-      .updateCharacter(this.character)
-      .subscribe(() => this.goBack());
+      .addCharacter({ name, baseInitiative } as Character)
+      .subscribe(character => {
+        this.characters.push(character);
+      });
+    this.showAddCharacterForm = false;
+  }
+
+  save(): void {
+    if (this.character.id) {
+      this.characterService
+        .updateCharacter(this.character)
+        .subscribe(() => this.goBack());
+    } else {
+      this.characterService
+        .addCharacter(this.character as Character)
+        .subscribe(character => {
+          this.characters.push(this.character);
+        });
+    }
   }
 }

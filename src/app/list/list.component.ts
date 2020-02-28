@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CharacterService } from '../character.service';
+import { CharacterService } from "../character.service";
 import { Character } from "../character";
 @Component({
   selector: "app-list",
@@ -9,17 +9,20 @@ import { Character } from "../character";
 export class ListComponent implements OnInit {
   characters: Character[];
   selectedCharacter: Character;
+  charactersLoaded: Promise<boolean>;
+  showAddCharacterForm: boolean;
 
   constructor(private characterService: CharacterService) {}
 
-  fillWithExampleData() {
-    this.characterService.getCharacters().subscribe(characters => this.characters = characters);;
-  }
-  
   ngOnInit() {
-    this.fillWithExampleData();
-    this.characters.forEach(function(character) {
-      character.currentInitiative = character.baseInitiative;
+    this.characterService.getCharacters().subscribe(characters => {
+      this.characters = characters;
+      this.characters.forEach(function(character) {
+        if (!character.currentInitiative) {
+          character.currentInitiative = character.baseInitiative;
+        }
+      });
+      this.charactersLoaded = Promise.resolve(true);
     });
   }
 
@@ -30,7 +33,6 @@ export class ListComponent implements OnInit {
   modifyInitiative(characterId, amount) {
     this.characters[Number(characterId)].currentInitiative += amount;
   }
-
   sortByInitiative() {
     return this.characters.sort(function(a, b) {
       if (a.currentInitiative < b.currentInitiative) {

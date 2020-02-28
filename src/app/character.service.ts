@@ -27,10 +27,12 @@ export class CharacterService {
 
   getCharacter(id: number): Observable<Character> {
     const url = `${this.charactersUrl}/${id}`;
-    return this.http.get<Character>(url).pipe(
+    let characters = this.http.get<Character>(url).pipe(
       tap(_ => this.log(`fetched Character id=${id}`)),
       catchError(this.handleError<Character>(`getCharacter id=${id}`))
     );
+
+    return characters;
   }
 
   updateCharacter(character: Character): Observable<any> {
@@ -38,6 +40,17 @@ export class CharacterService {
       tap(_ => this.log(`updated Character id=${character.id}`)),
       catchError(this.handleError<any>("updateCharacter"))
     );
+  }
+
+  addCharacter(character: Character): Observable<Character> {
+    return this.http
+      .post<Character>(this.charactersUrl, character, this.httpOptions)
+      .pipe(
+        tap((newCharacter: Character) =>
+          this.log(`added Character w/ id=${newCharacter.id}`)
+        ),
+        catchError(this.handleError<Character>("addCharacter"))
+      );
   }
 
   private log(message: string) {
