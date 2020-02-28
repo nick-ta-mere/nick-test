@@ -8,8 +8,6 @@ import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 
 import { AppComponent } from "./app.component";
 import { TopBarComponent } from "./top-bar/top-bar.component";
-import { ProductAlertsComponent } from "./product-alerts/product-alerts.component";
-import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { ListComponent } from "./list/list.component";
 import { CharacterDetailComponent } from "./character-detail/character-detail.component";
 import { CharacterService } from "./character.service";
@@ -30,15 +28,12 @@ import { InMemoryDataService } from "./in-memory-data.service";
       dataEncapsulation: false
     }),
     RouterModule.forRoot([
-      { path: "", component: ListComponent },
-      { path: "products/:productId", component: ProductDetailsComponent }
+      { path: "", component: ListComponent }
     ])
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
-    ProductAlertsComponent,
-    ProductDetailsComponent,
     ListComponent,
     CharacterDetailComponent,
     MessagesComponent

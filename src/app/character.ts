@@ -8,7 +8,6 @@ export class Character {
   turnTaken = false;
   private actionPointsUsed: number;
 
-
   constructor(id, name, baseInitiative, stunDamage, physicalDamage) {
     this.id = id;
     this.name = name;
@@ -18,11 +17,22 @@ export class Character {
     this.actionPointsUsed = 0;
   }
   public getCurrentInitiative() {
-    return this.baseInitiative - Math.floor(this.stunDamage / 3) - Math.floor(this.physicalDamage / 3) - this.actionPointsUsed;
+    return (
+      this.baseInitiative -
+      Math.floor(this.stunDamage / 3) -
+      Math.floor(this.physicalDamage / 3) -
+      this.actionPointsUsed
+    );
   }
 
   static createFromObject(object) {
-    return new Character(object.id, object.name, object.baseInitiative, object.stunDamage, object.physicalDamage);
+    return new Character(
+      object.id,
+      object.name,
+      object.baseInitiative,
+      object.stunDamage,
+      object.physicalDamage
+    );
   }
 
   useAction() {
@@ -30,7 +40,9 @@ export class Character {
   }
 
   takeTurn() {
-    this.actionPointsUsed += 10;
-    this.turnTaken = true;
+    if (!this.turnTaken) {
+      this.actionPointsUsed += 10;
+      this.turnTaken = true;
+    }
   }
 }

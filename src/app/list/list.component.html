@@ -7,14 +7,13 @@
 	<tbody *ngIf="charactersLoaded | async">
 
 		<tr *ngFor="let character of sortByInitiative(); index as index"
-			[class.selected]="character === selectedCharacter"
-      [class.strike-through]="character.turnTaken">
+			[class.selected]="character === selectedCharacter" [class.strike-through]="character.turnTaken">
 			<!-- <td>{{character.id}}</td> -->
 			<td>{{character.getCurrentInitiative()}}</td>
 			<td (click)="onSelect(character)">{{character.name}}</td>
 			<td>{{character.baseInitiative}}</td>
-			<td><button (click)="character.useAction()">-5</button></td>
-      <td><button (click)="character.takeTurn()">Turn</button></td> 
+			<td><button (click)="character.useAction()" [attr.disabled]="character.turnTaken ? '' : null">-5</button></td>
+			<td><button (click)="character.takeTurn()" [attr.disabled]="character.turnTaken ? '' : null">Turn</button></td>
 		</tr>
 	</tbody>
 </table>
