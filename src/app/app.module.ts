@@ -4,6 +4,7 @@ import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 
 import { AppComponent } from "./app.component";
 import { TopBarComponent } from "./top-bar/top-bar.component";
@@ -17,6 +18,7 @@ import { CharacterDetailComponent } from "./character-detail/character-detail.co
 import { CharacterService } from "./character.service";
 import { MessagesComponent } from "./messages/messages.component";
 import { MessageService } from "./message.service";
+import { InMemoryDataService } from "./in-memory-data.service";
 
 @NgModule({
   imports: [
@@ -24,6 +26,12 @@ import { MessageService } from "./message.service";
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false
+    }),
     RouterModule.forRoot([
       { path: "", component: ListComponent },
       { path: "products/:productId", component: ProductDetailsComponent }
@@ -42,7 +50,6 @@ import { MessageService } from "./message.service";
     MessagesComponent
   ],
   bootstrap: [AppComponent],
-  providers: [CharacterService, MessageService]
+  providers: [CharacterService, MessageService, InMemoryDataService]
 })
 export class AppModule {}
-
