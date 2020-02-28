@@ -8,6 +8,9 @@ import { MessageService } from "./message.service";
 import { Character } from "./character";
 @Injectable()
 export class CharacterService {
+  httpOptions = {
+    headers: new HttpHeaders({ "Content-Type": "application/json" })
+  };
   private charactersUrl = "api/characters"; // URL to web api
 
   constructor(
@@ -27,6 +30,13 @@ export class CharacterService {
     return this.http.get<Character>(url).pipe(
       tap(_ => this.log(`fetched Character id=${id}`)),
       catchError(this.handleError<Character>(`getCharacter id=${id}`))
+    );
+  }
+
+  updateCharacter(character: Character): Observable<any> {
+    return this.http.put(this.charactersUrl, character, this.httpOptions).pipe(
+      tap(_ => this.log(`updated Character id=${character.id}`)),
+      catchError(this.handleError<any>("updateCharacter"))
     );
   }
 

@@ -8,12 +8,9 @@ import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 
 import { AppComponent } from "./app.component";
 import { TopBarComponent } from "./top-bar/top-bar.component";
-import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductAlertsComponent } from "./product-alerts/product-alerts.component";
 import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { ListComponent } from "./list/list.component";
-import { AddCharacterComponent } from "./add-character/add-character.component";
-import { AddCharacter2Component } from "./add-character2/add-character2.component";
 import { CharacterDetailComponent } from "./character-detail/character-detail.component";
 import { CharacterService } from "./character.service";
 import { MessagesComponent } from "./messages/messages.component";
@@ -40,12 +37,9 @@ import { InMemoryDataService } from "./in-memory-data.service";
   declarations: [
     AppComponent,
     TopBarComponent,
-    ProductListComponent,
     ProductAlertsComponent,
     ProductDetailsComponent,
     ListComponent,
-    AddCharacterComponent,
-    AddCharacter2Component,
     CharacterDetailComponent,
     MessagesComponent
   ],
