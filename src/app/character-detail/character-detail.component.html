@@ -1,3 +1,10 @@
+<button (click)="showAddCharacterForm()">
+  New Character
+</button>
+
+<br/>
+<br/>
+
 <div *ngIf="character">
 	<div>
 		<label>name:
@@ -19,10 +26,5 @@
       <input [(ngModel)]="character.physicalDamage" placeholder=""/>
     </label>
 	</div>
-  <button (click)="save()">save</button>
+	<button (click)="save()">save</button>
 </div>
-
- <button (click)="showAddCharacterForm()">
-    Add Character
-  </button>
-<br/>

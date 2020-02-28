@@ -11,7 +11,7 @@ export class CharacterService {
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
-  private charactersUrl = "api/characters"; // URL to web api
+  private charactersUrl = "api/characters";
 
   constructor(
     private http: HttpClient,
@@ -43,6 +43,7 @@ export class CharacterService {
   }
 
   addCharacter(character: Character): Observable<Character> {
+    console.log(character);
     return this.http
       .post<Character>(this.charactersUrl, character, this.httpOptions)
       .pipe(

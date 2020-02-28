@@ -1,22 +1,21 @@
 <table class="characters">
 	<thead>
+		<!-- <th>ID</th> -->
 		<th>Initiative</th>
 		<th class="character-name">Name</th>
 		<th>baseInitiative</th>
 	<tbody *ngIf="charactersLoaded | async">
 
-		<tr *ngFor="let character of sortByInitiative(); index as characterId"
-			[class.selected]="character === selectedCharacter" >
-			<td>{{character.currentInitiative}}</td>
+		<tr *ngFor="let character of sortByInitiative(); index as index"
+			[class.selected]="character === selectedCharacter"
+      [class.strike-through]="character.turnTaken">
+			<!-- <td>{{character.id}}</td> -->
+			<td>{{character.getCurrentInitiative()}}</td>
 			<td (click)="onSelect(character)">{{character.name}}</td>
 			<td>{{character.baseInitiative}}</td>
-			<!-- <td><button (click)="modifyInitiative(characterId, 5)">+5</button></td> -->
-			<!-- <td><button (click)="modifyInitiative(characterId, 1)">+1</button></td>
-      <td><button (click)="modifyInitiative(characterId, -1)">-1</button></td> -->
-			<td><button (click)="modifyInitiative(characterId, -5)">-5</button></td>
+			<td><button (click)="character.useAction()">-5</button></td>
+      <td><button (click)="character.takeTurn()">Turn</button></td> 
 		</tr>
 	</tbody>
 </table>
-
-<br/>
 <app-character-detail [character]="selectedCharacter"></app-character-detail>

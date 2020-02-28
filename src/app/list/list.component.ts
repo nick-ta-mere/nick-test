@@ -10,35 +10,39 @@ export class ListComponent implements OnInit {
   characters: Character[];
   selectedCharacter: Character;
   charactersLoaded: Promise<boolean>;
-  showAddCharacterForm: boolean;
 
   constructor(private characterService: CharacterService) {}
 
   ngOnInit() {
     this.characterService.getCharacters().subscribe(characters => {
-      this.characters = characters;
-      this.characters.forEach(function(character) {
-        if (!character.currentInitiative) {
-          character.currentInitiative = character.baseInitiative;
-        }
+      characters.map(function(e, i) {
+        characters[i] = Character.createFromObject(e);
       });
+      this.characters = characters;
       this.charactersLoaded = Promise.resolve(true);
     });
+  }
+
+  public addCharacter(character) {
+    this.characters.push(Character.createFromObject(character));
   }
 
   onSelect(character: Character): void {
     this.selectedCharacter = character;
   }
 
-  modifyInitiative(characterId, amount) {
-    this.characters[Number(characterId)].currentInitiative += amount;
-  }
   sortByInitiative() {
     return this.characters.sort(function(a, b) {
-      if (a.currentInitiative < b.currentInitiative) {
+      if (a.turnTaken && !b.turnTaken) {
         return 1;
       }
-      if (a.currentInitiative > b.currentInitiative) {
+      if (!a.turnTaken && b.turnTaken) {
+        return -1;
+      }
+      if (a.getCurrentInitiative() < b.getCurrentInitiative()) {
+        return 1;
+      }
+      if (a.getCurrentInitiative() > b.getCurrentInitiative()) {
         return -1;
       }
 

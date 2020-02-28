@@ -5,6 +5,7 @@ import { Location } from "@angular/common";
 import { CharacterService } from "../character.service";
 
 import { Character } from "../character";
+import { ListComponent } from "../list/list.component";
 
 @Component({
   selector: "app-character-detail",
@@ -13,11 +14,12 @@ import { Character } from "../character";
 })
 export class CharacterDetailComponent implements OnInit {
   @Input() character: Character;
-
   constructor(
     private characterService: CharacterService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    
+    private list: ListComponent
   ) {}
 
   ngOnInit() {}
@@ -27,16 +29,14 @@ export class CharacterDetailComponent implements OnInit {
   }
 
   showAddCharacterForm() {
-    this.character = {};
-  }
-
-  add(name: string, baseInitiative: number): void {
-    this.characterService
-      .addCharacter({ name, baseInitiative } as Character)
-      .subscribe(character => {
-        this.characters.push(character);
-      });
-    this.showAddCharacterForm = false;
+    this.character = {
+      name: null,
+      baseInitiative: null,
+      currentInitiative: null,
+      stunDamage: null,
+      physicalDamage: null
+    };
+      // this.character = new Character();
   }
 
   save(): void {
@@ -47,9 +47,7 @@ export class CharacterDetailComponent implements OnInit {
     } else {
       this.characterService
         .addCharacter(this.character as Character)
-        .subscribe(character => {
-          this.characters.push(this.character);
-        });
+        .subscribe(character => this.list.addCharacter(character));
     }
   }
 }

@@ -44,3 +44,6 @@ th.character-name{
   width: 150px;
   display: flex;
 }
+tr.strike-through {
+  text-decoration: line-through;
+}
