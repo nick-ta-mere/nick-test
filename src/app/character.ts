@@ -3,22 +3,45 @@ export class Character {
   name: string;
   baseInitiative: number;
   currentInitiative: number;
-  stunDamage: number;
-  physicalDamage: number;
-  turnTaken = false;
-  private actionPointsUsed: number;
+  stunDamage: number = 0;
+  physicalDamage: number = 0;
+  turnTaken: boolean = false;
+  initiativeDice: number = 0;
+  diceResult: number;
 
-  constructor(id, name, baseInitiative, stunDamage, physicalDamage) {
+  private actionPointsUsed: number = 0;
+
+  constructor(
+    id?: number,
+    name?: string,
+    baseInitiative?: number,
+    stunDamage: number = 0,
+    physicalDamage: number = 0,
+    initiativeDice?: number
+  ) {
     this.id = id;
     this.name = name;
     this.baseInitiative = baseInitiative;
-    this.stunDamage = stunDamage || 0;
-    this.physicalDamage = physicalDamage || 0;
-    this.actionPointsUsed = 0;
+    this.stunDamage = stunDamage;
+    this.physicalDamage = physicalDamage;
+    this.initiativeDice = initiativeDice;
+    this.rollDice();
   }
+
+  private rollDice() {
+    console.log(this);
+    let i: number = 0;
+    this.diceResult = 0;
+    while (i < this.initiativeDice) {
+      i++;
+      this.diceResult += Math.floor(Math.random() * 6) + 1;
+    }
+  }
+
   public getCurrentInitiative() {
     return (
-      this.baseInitiative -
+      this.baseInitiative +
+      this.diceResult -
       Math.floor(this.stunDamage / 3) -
       Math.floor(this.physicalDamage / 3) -
       this.actionPointsUsed
@@ -31,7 +54,8 @@ export class Character {
       object.name,
       object.baseInitiative,
       object.stunDamage,
-      object.physicalDamage
+      object.physicalDamage,
+      object.initiativeDice
     );
   }
 

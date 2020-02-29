@@ -29,14 +29,8 @@ export class CharacterDetailComponent implements OnInit {
   }
 
   showAddCharacterForm() {
-    this.character = {
-      name: null,
-      baseInitiative: null,
-      currentInitiative: null,
-      stunDamage: null,
-      physicalDamage: null
-    };
-      // this.character = new Character();
+  
+      this.character = new Character();
   }
 
   save(): void {
