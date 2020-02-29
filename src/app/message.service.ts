@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class MessageService {
   messages: string[] = [];
+  diceRolls = [];
 
   constructor() {}
 
@@ -12,14 +13,18 @@ export class MessageService {
 
   clear() {
     this.messages = [];
+    this.diceRolls = [];
   }
 
   addDiceRollMessage(characterName: string, roll) {
-    let m = characterName + " rolled: ";
-    roll.forEach(result => {
-      m += this.getDieIcon(result);
+    // let m = characterName + " rolled: ";
+    // roll.forEach(result => {
+    //   m += this.getDieIcon(result);
+    // });
+    this.diceRolls.push({
+      name: characterName,
+      rolls: roll
     });
-    this.add(m);
   }
 
   private getDieIcon(result: number) {

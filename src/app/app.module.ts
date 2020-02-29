@@ -11,6 +11,7 @@ import { TopBarComponent } from "./top-bar/top-bar.component";
 import { ListComponent } from "./list/list.component";
 import { CharacterDetailComponent } from "./character-detail/character-detail.component";
 import { CharacterService } from "./character.service";
+import { MessageComponent } from "./messages/message.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { MessageService } from "./message.service";
 import { InMemoryDataService } from "./in-memory-data.service";
@@ -36,7 +37,8 @@ import { InMemoryDataService } from "./in-memory-data.service";
     TopBarComponent,
     ListComponent,
     CharacterDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    MessageComponent
   ],
   bootstrap: [AppComponent],
   providers: [CharacterService, MessageService, InMemoryDataService]

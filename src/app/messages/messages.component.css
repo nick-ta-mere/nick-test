@@ -33,10 +33,27 @@ button.clear {
   color: #333;
   margin-bottom: 12px;
 }
-i.die-1 {
-   background: url('assets/images/dice-six-faces-one.svg');
+i.die {
     height: 15px;
     width: 15px;
     display: inline-block;
     margin-right: 2px;
+}
+i.die-1 {
+   background: url('assets/images/dice-six-faces-one.svg');
+}
+i.die-2 {
+   background: url('assets/images/dice-six-faces-two.svg');
+}
+i.die-3 {
+   background: url('assets/images/dice-six-faces-three.svg');
+}
+i.die-4 {
+   background: url('assets/images/dice-six-faces-four.svg');
+}
+i.die-5 {
+   background: url('assets/images/dice-six-faces-five.svg');
+}
+i.die-6 {
+   background: url('assets/images/dice-six-faces-six.svg');
 }
