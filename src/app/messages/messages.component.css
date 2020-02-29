@@ -33,3 +33,10 @@ button.clear {
   color: #333;
   margin-bottom: 12px;
 }
+i.die-1 {
+   background: url('assets/images/dice-six-faces-one.svg');
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    margin-right: 2px;
+}

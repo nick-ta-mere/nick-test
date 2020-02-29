@@ -41,7 +41,8 @@ export class ListComponent implements OnInit {
     this.selectedCharacter = character;
   }
 
-  checkIfRoundIsOver() {
+  /* checks if the current inititaive pass is over, because everyone acted once */
+  checkIfInitiativeRoundIsOver() {
     let roundOver = true;
     this.characters.forEach((character: Character) => {
       if (!character.turnTaken) {
@@ -49,14 +50,31 @@ export class ListComponent implements OnInit {
       }
     });
     if (roundOver) {
-      this.messageService.add("Round over: starting from top!");
-      this.resetCharacters();
+      let combatRoundOver = this.checkIfCombatRoundIsOver();
+      if (!combatRoundOver) {
+        this.messageService.add("Round over: starting from top!");
+      }
+      this.resetCharacters(combatRoundOver);
     }
   }
 
-  resetCharacters() {
+  /** checks if the entire combat round is over, because everyone used all their initiative passes */
+  checkIfCombatRoundIsOver() {
+    let canAnyoneStillAct = false;
     this.characters.forEach((character: Character) => {
-      character.resetTurnTaken(false);
+      if (character.currentInitiative > 0) {
+        canAnyoneStillAct = true;
+      }
+    });
+    if (!canAnyoneStillAct) {
+      this.messageService.add("Combat round over! Dices rerolled.");
+    }
+    return !canAnyoneStillAct;
+  }
+
+  resetCharacters(combatRoundOver) {
+    this.characters.forEach((character: Character) => {
+      character.resetTurnTaken(combatRoundOver);
     });
   }
 

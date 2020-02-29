@@ -32,7 +32,7 @@ export class Character {
       diceRolls.push(diceRoll);
       this.diceResult += diceRoll;
     }
-    this.messageService.add(this.name + " rolled: " + diceRolls);
+    this.messageService.addDiceRollMessage(this.name, diceRolls);
   }
 
   /* calculates the current initiative from all relevant factors */
@@ -83,6 +83,9 @@ export class Character {
 
   useAction() {
     this.actionPointsUsed += 5;
+    if (this.currentInitiative <= 0) {
+      this.turnTaken = true;
+    }
   }
 
   takeTurn() {
@@ -90,12 +93,16 @@ export class Character {
       this.actionPointsUsed += 10;
       this.turnTaken = true;
     }
-    this.list.checkIfRoundIsOver();
+    this.list.checkIfInitiativeRoundIsOver();
   }
 
-  resetTurnTaken(forceReset: boolean) {
-    if (this.currentInitiative > 0 || forceReset) {
+  resetTurnTaken(combatRoundOver: boolean) {
+    if (this.currentInitiative > 0 || combatRoundOver) {
       this.turnTaken = false;
+    }
+    if (combatRoundOver) {
+      this.actionPointsUsed = 0;
+      this.rollDice();
     }
   }
 }
