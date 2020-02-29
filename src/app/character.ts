@@ -1,3 +1,5 @@
+
+import { MessageService } from "./message.service";
 export class Character {
   id: number;
   name: string;
@@ -17,7 +19,7 @@ export class Character {
     baseInitiative?: number,
     stunDamage: number = 0,
     physicalDamage: number = 0,
-    initiativeDice?: number
+    initiativeDice?: number,
   ) {
     this.id = id;
     this.name = name;
