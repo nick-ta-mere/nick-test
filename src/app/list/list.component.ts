@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CharacterService } from "../character.service";
+import { MessageService } from "../message.service";
 import { Character } from "../character";
 @Component({
   selector: "app-list",
@@ -11,24 +12,52 @@ export class ListComponent implements OnInit {
   selectedCharacter: Character;
   charactersLoaded: Promise<boolean>;
 
-  constructor(private characterService: CharacterService) {}
+  constructor(
+    private characterService: CharacterService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.characterService.getCharacters().subscribe(characters => {
-      characters.map(function(e, i) {
-        characters[i] = Character.createFromObject(e);
+      characters.map((e, i) => {
+        characters[i] = Character.createFromObject(
+          this,
+          this.messageService,
+          e
+        );
       });
       this.characters = characters;
       this.charactersLoaded = Promise.resolve(true);
     });
   }
 
-  public addCharacter(character) {
-    this.characters.push(Character.createFromObject(character));
+  public addCharacter(characterData) {
+    this.characters.push(
+      Character.createFromObject(this, this.messageService, characterData)
+    );
   }
 
   onSelect(character: Character): void {
     this.selectedCharacter = character;
+  }
+
+  checkIfRoundIsOver() {
+    let roundOver = true;
+    this.characters.forEach((character: Character) => {
+      if (!character.turnTaken) {
+        roundOver = false;
+      }
+    });
+    if (roundOver) {
+      this.messageService.add("Round over: starting from top!");
+      this.resetCharacters();
+    }
+  }
+
+  resetCharacters() {
+    this.characters.forEach((character: Character) => {
+      character.resetTurnTaken(false);
+    });
   }
 
   sortByInitiative() {
@@ -39,10 +68,10 @@ export class ListComponent implements OnInit {
       if (!a.turnTaken && b.turnTaken) {
         return -1;
       }
-      if (a.getCurrentInitiative() < b.getCurrentInitiative()) {
+      if (a.currentInitiative < b.currentInitiative) {
         return 1;
       }
-      if (a.getCurrentInitiative() > b.getCurrentInitiative()) {
+      if (a.currentInitiative > b.currentInitiative) {
         return -1;
       }
 

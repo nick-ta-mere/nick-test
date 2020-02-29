@@ -18,7 +18,6 @@ export class CharacterDetailComponent implements OnInit {
     private characterService: CharacterService,
     private route: ActivatedRoute,
     private location: Location,
-    
     private list: ListComponent
   ) {}
 
@@ -29,8 +28,7 @@ export class CharacterDetailComponent implements OnInit {
   }
 
   showAddCharacterForm() {
-  
-      this.character = new Character();
+    this.character = new Character(this.list);
   }
 
   save(): void {
