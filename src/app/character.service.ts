@@ -25,18 +25,18 @@ export class CharacterService {
     );
   }
 
-  getCharacter(id: number): Observable<Character> {
-    const url = `${this.charactersUrl}/${id}`;
-    let characters = this.http.get<Character>(url).pipe(
-      tap(_ => console.log(`fetched Character id=${id}`)),
-      catchError(this.handleError<Character>(`getCharacter id=${id}`))
-    );
+  // getCharacter(id: number): Observable<Character> {
+  //   const url = `${this.charactersUrl}/${id}`;
+  //   let characters = this.http.get<Character>(url).pipe(
+  //     tap(_ => console.log(`fetched Character id=${id}`)),
+  //     catchError(this.handleError<Character>(`getCharacter id=${id}`))
+  //   );
 
-    return characters;
-  }
+  //   return characters;
+  // }
 
   updateCharacter(character: Character): Observable<any> {
-    return this.http.put(this.charactersUrl, character, this.httpOptions).pipe(
+    return this.http.put(this.charactersUrl, character.serialize(), this.httpOptions).pipe(
       tap(_ => console.log(`updated Character id=${character.id}`)),
       catchError(this.handleError<any>("updateCharacter"))
     );
@@ -44,10 +44,10 @@ export class CharacterService {
 
   addCharacter(character: Character): Observable<Character> {
     return this.http
-      .post<Character>(this.charactersUrl, character, this.httpOptions)
+      .post<Character>(this.charactersUrl, character.serialize(), this.httpOptions)
       .pipe(
         tap((newCharacter: Character) =>
-          this.log(`added Character w/ id=${newCharacter.id}`)
+          this.log(`added "${newCharacter.name}" with id=${newCharacter.id}`)
         ),
         catchError(this.handleError<Character>("addCharacter"))
       );

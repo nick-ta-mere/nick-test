@@ -11,7 +11,7 @@ export class Character {
   stunDamage: number = 0;
   physicalDamage: number = 0;
   turnTaken: boolean = false;
-  initiativeDice: number = 0;
+  initiativeDice: number;
   diceResult: number;
 
   private actionPointsUsed: number = 0;
@@ -20,6 +20,17 @@ export class Character {
     private list: ListComponent,
     private messageService: MessageService
   ) {}
+
+  serialize() {
+    return {
+      id: this.id,
+      name: this.name,
+      baseInitiative: this.baseInitiative,
+      stunDamage: this.stunDamage,
+      physicalDamage: this.physicalDamage,
+      initiativeDice: this.initiativeDice
+    };
+  }
 
   /* rolls with the set number of dice and displays the results */
   private rollDice() {
@@ -70,7 +81,7 @@ export class Character {
     baseInitiative?: number,
     stunDamage: number = 0,
     physicalDamage: number = 0,
-    initiativeDice?: number
+    initiativeDice: number =0
   ) {
     this.id = id;
     this.name = name;

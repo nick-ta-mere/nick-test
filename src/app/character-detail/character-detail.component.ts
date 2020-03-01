@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { CharacterService } from "../character.service";
+import { MessageService } from "../message.service";
 
 import { Character } from "../character";
 import { ListComponent } from "../list/list.component";
@@ -18,6 +19,7 @@ export class CharacterDetailComponent implements OnInit {
     private characterService: CharacterService,
     private route: ActivatedRoute,
     private location: Location,
+    private messageService: MessageService,
     private list: ListComponent
   ) {}
 
@@ -28,7 +30,7 @@ export class CharacterDetailComponent implements OnInit {
   }
 
   showAddCharacterForm() {
-    this.character = new Character(this.list);
+    this.character = new Character(this.list, this.messageService);
   }
 
   save(): void {

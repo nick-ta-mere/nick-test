@@ -8,12 +8,17 @@
 <div *ngIf="character">
 	<div>
 		<label>name:
-      <input [(ngModel)]="character.name" placeholder="name"/>
+      <input [(ngModel)]="character.name" placeholder="Name"/>
     </label>
 	</div>
 	<div>
 		<label>Base Initiative:
-      <input [(ngModel)]="character.baseInitiative" placeholder="baseInitiative"/>
+      <input [(ngModel)]="character.baseInitiative" placeholder="Base Initiative"/>
+    </label>
+	</div>
+	<div>
+		<label>Initiative Dice:
+      <input [(ngModel)]="character.initiativeDice" placeholder="Initiative Dice"/>
     </label>
 	</div>
 	<div>
