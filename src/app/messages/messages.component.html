@@ -4,8 +4,8 @@
 	<button class="clear"
           (click)="messageService.clear()">clear</button>
 	<div *ngFor='let message of messageService.messages'> {{message}} </div>
-	<div *ngFor='let message of messageService.diceRolls'>
-		<app-message [message]="message"></app-message>
+	<div *ngFor='let message of messageService.diceRolls; index as index'>
+		<app-message [id]="index"[message]="message"></app-message>
 	</div>
 
 </div>

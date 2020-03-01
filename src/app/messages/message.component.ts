@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { MessageService } from '../message.service';
 
 @Component({
   selector: "app-message",
@@ -7,9 +8,14 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class MessageComponent implements OnInit {
   @Input() public message: string;
+  @Input() public id: number;
   @Input() public rolls;
 
-  constructor() {}
+  constructor(public messageService: MessageService) { }
 
   ngOnInit() {}
+
+  public remove(){
+    this.messageService.remove(this.id);
+  }
 }

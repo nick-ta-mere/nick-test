@@ -11,23 +11,22 @@ export class MessageService {
     this.messages.push(message);
   }
 
+  remove(id) {
+    if (id > -1) {
+      this.diceRolls.splice(id, 1);
+    }
+  }
+
   clear() {
     this.messages = [];
     this.diceRolls = [];
   }
 
   addDiceRollMessage(characterName: string, roll) {
-    // let m = characterName + " rolled: ";
-    // roll.forEach(result => {
-    //   m += this.getDieIcon(result);
-    // });
     this.diceRolls.push({
       name: characterName,
       rolls: roll
     });
-  }
-
-  private getDieIcon(result: number) {
-    return '<i class="die-' + result + '">1</i> ';
+    setTimeout(() => this.remove(this.diceRolls.length -1), 3000);
   }
 }
