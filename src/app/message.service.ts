@@ -9,11 +9,19 @@ export class MessageService {
 
   add(message: string) {
     this.messages.push(message);
+    // remove after 5 seconds
+    setTimeout(() => this.remove(this.messages.length -1), 5000);
+  }
+
+  removeDiceRollMessage(id) {
+    if (id > -1) {
+      this.diceRolls.splice(id, 1);
+    }
   }
 
   remove(id) {
     if (id > -1) {
-      this.diceRolls.splice(id, 1);
+      this.messages.splice(id, 1);
     }
   }
 
@@ -27,6 +35,7 @@ export class MessageService {
       name: characterName,
       rolls: roll
     });
-    setTimeout(() => this.remove(this.diceRolls.length -1), 3000);
+    // remove after 5 seconds
+    setTimeout(() => this.removeDiceRollMessage(this.diceRolls.length -1), 5000);
   }
 }

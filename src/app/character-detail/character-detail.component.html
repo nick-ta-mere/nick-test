@@ -5,31 +5,30 @@
 <br/>
 <br/>
 
-<div *ngIf="character">
-	<div>
-		<label>name:
-      <input [(ngModel)]="character.name" placeholder="Name"/>
-    </label>
-	</div>
-	<div>
-		<label>Base Initiative:
-      <input [(ngModel)]="character.baseInitiative" placeholder="Base Initiative"/>
-    </label>
-	</div>
-	<div>
-		<label>Initiative Dice:
-      <input [(ngModel)]="character.initiativeDice" placeholder="Initiative Dice"/>
-    </label>
-	</div>
-	<div>
-		<label>Stun Damage:
-      <input [(ngModel)]="character.stunDamage" placeholder=""/>
-    </label>
-	</div>
-	<div>
-		<label>Physical Damage:
-      <input [(ngModel)]="character.physicalDamage" placeholder=""/>
-    </label>
-	</div>
+<div class="character-detail" *ngIf="character">
+  <div class="float-left">
+    <div>
+      <label for="name">name:</label>
+      <input id="name" [(ngModel)]="character.name" placeholder="Name"/>
+    </div>
+    <div>
+      <label for="base-initiative">Base Initiative:</label>
+      <input id="base-initiative" [(ngModel)]="character.baseInitiative" placeholder="Base Initiative"/>
+    </div>
+    <div>
+      <label for="initiative-dice">Initiative Dice:</label>
+      <input id="initiative-dice" [(ngModel)]="character.initiativeDice" placeholder="Initiative Dice"/>
+    </div>
+  </div>
+  <div class="float-left">
+    <div>
+      <label for="stun-damage">Stun Damage:</label>
+      <input id="stun-damage" [(ngModel)]="character.stunDamage" placeholder=""/>
+    </div>
+    <div>
+      <label for="physical-damage">Physical Damage:</label>
+      <input id="physical-damage" [(ngModel)]="character.physicalDamage" placeholder=""/>
+    </div>
+  </div>
 	<button (click)="save()">save</button>
 </div>

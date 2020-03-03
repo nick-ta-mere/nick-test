@@ -136,7 +136,12 @@ app-top-bar h1 {
   margin: 0;
 }
 
-
+.float-left {
+  float:left;
+}
+.float-right {
+  float:right;
+}
 
 /*
 Copyright Google LLC. All Rights Reserved.
