@@ -29,6 +29,10 @@
       <label for="physical-damage">Physical Damage:</label>
       <input id="physical-damage" [(ngModel)]="character.physicalDamage" placeholder=""/>
     </div>
+    <div>
+      <label for="has-counter-strike">Has Counter Strike:</label>
+      <input type="checkbox" id="has-counter-strike" [(ngModel)]="character.hasCounterStrike" placeholder=""/>
+    </div>
   </div>
 	<button (click)="save()">save</button>
 </div>

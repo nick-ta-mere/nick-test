@@ -13,21 +13,22 @@ export class InMemoryDataService implements InMemoryDbService {
         name: "Snow White",
         baseInitiative: 13,
         currentInitiative: null,
-        initiativeDice: 2
+        initiativeDice: 2,
+        hasCounterStrike: true
       },
       {
         id: 2,
         name: "Roy",
-        baseInitiative: -1,
+        baseInitiative: 12,
         currentInitiative: null,
-        initiativeDice: 2
+        initiativeDice: 3
       },
       {
         id: 3,
         name: "Clutch",
-        baseInitiative: 7,
+        baseInitiative: 12,
         currentInitiative: null,
-        initiativeDice: 3
+        initiativeDice: 1
       },
       {
         id: 4,
@@ -35,6 +36,13 @@ export class InMemoryDataService implements InMemoryDbService {
         baseInitiative: 8,
         currentInitiative: null,
         initiativeDice: 1
+      },
+      {
+        id: 5,
+        name: "Bozo",
+        baseInitiative: 8,
+        currentInitiative: null,
+        initiativeDice: 2
       }
     ];
     return { characters };

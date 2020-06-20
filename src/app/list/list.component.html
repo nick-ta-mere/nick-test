@@ -12,8 +12,9 @@
 			<td>{{character.currentInitiative}}</td>
 			<td (click)="onSelect(character)">{{character.name}}</td>
 			<td>{{character.baseInitiative}}</td>
-			<td><button (click)="character.useAction()" [attr.disabled]="character.turnTaken ? '' : null">-5</button></td>
 			<td><button (click)="character.takeTurn()" [attr.disabled]="character.turnTaken ? '' : null">Turn</button></td>
+			<td><button (click)="character.useAction()" [attr.disabled]="character.turnTaken ? '' : null">-5</button></td>
+			<td *ngIf="character.hasCounterStrike"><button (click)="character.useCounterStrike()" [attr.disabled]="character.turnTaken ? '' : null">-7</button></td>
 		</tr>
 	</tbody>
 </table>

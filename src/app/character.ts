@@ -13,6 +13,7 @@ export class Character {
   turnTaken: boolean = false;
   initiativeDice: number;
   diceResult: number;
+  hasCounterStrike: boolean = false;
 
   private actionPointsUsed: number = 0;
 
@@ -28,7 +29,8 @@ export class Character {
       baseInitiative: this.baseInitiative,
       stunDamage: this.stunDamage,
       physicalDamage: this.physicalDamage,
-      initiativeDice: this.initiativeDice
+      initiativeDice: this.initiativeDice,
+      hasCounterStrike: this.hasCounterStrike
     };
   }
 
@@ -70,7 +72,8 @@ export class Character {
       object.baseInitiative,
       object.stunDamage,
       object.physicalDamage,
-      object.initiativeDice
+      object.initiativeDice,
+      object.hasCounterStrike
     );
     return character;
   }
@@ -81,7 +84,8 @@ export class Character {
     baseInitiative?: number,
     stunDamage: number = 0,
     physicalDamage: number = 0,
-    initiativeDice: number =0
+    initiativeDice: number = 0,
+    hasCounterStrike: boolean = false
   ) {
     this.id = id;
     this.name = name;
@@ -89,11 +93,19 @@ export class Character {
     this.stunDamage = stunDamage;
     this.physicalDamage = physicalDamage;
     this.initiativeDice = initiativeDice;
+    this.hasCounterStrike = hasCounterStrike;
     this.rollDice();
   }
 
   useAction() {
     this.actionPointsUsed += 5;
+    if (this.currentInitiative <= 0) {
+      this.turnTaken = true;
+    }
+  }
+
+  useCounterStrike() {
+    this.actionPointsUsed += 7;
     if (this.currentInitiative <= 0) {
       this.turnTaken = true;
     }
