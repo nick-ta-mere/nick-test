@@ -8,13 +8,24 @@
 
 		<tr *ngFor="let character of sortByInitiative(); index as index"
 			[class.selected]="character === selectedCharacter" [class.strike-through]="character.turnTaken">
-			<!-- <td>{{character.id}}</td> -->
-			<td>{{character.currentInitiative}}</td>
-			<td (click)="onSelect(character)">{{character.name}}</td>
-			<td>{{character.baseInitiative}}</td>
-			<td><button (click)="character.takeTurn()" [attr.disabled]="character.turnTaken ? '' : null">Turn</button></td>
-			<td><button (click)="character.useAction()" [attr.disabled]="character.turnTaken ? '' : null">-5</button></td>
-			<td *ngIf="character.hasCounterStrike"><button (click)="character.useCounterStrike()" [attr.disabled]="character.turnTaken ? '' : null">-7</button></td>
+			<ng-container *ngIf="!character.isDead">
+				<!-- <td>{{character.id}}</td> -->
+				<td>{{character.currentInitiative}}</td>
+				<td (click)="onSelect(character)">{{character.name}}</td>
+				<td>{{character.baseInitiative}}</td>
+				<td>
+          <button (click)="character.takeTurn()" [attr.disabled]="character.turnTaken ? '' : null">Turn</button>
+				</td>
+				<td>
+          <button (click)="character.kill()" [attr.disabled]="character.turnTaken ? '' : null">Dead</button>
+				</td>
+				<td>
+          <button (click)="character.useAction()" [attr.disabled]="character.turnTaken ? '' : null">-5</button>
+				</td>
+				<td *ngIf="character.hasCounterStrike">
+					<button (click)="character.useCounterStrike()" [attr.disabled]="character.turnTaken ? '' : null">-7</button>
+				</td>
+			</ng-container>
 		</tr>
 	</tbody>
 </table>

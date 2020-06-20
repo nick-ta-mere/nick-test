@@ -14,6 +14,7 @@ export class Character {
   initiativeDice: number;
   diceResult: number;
   hasCounterStrike: boolean = false;
+  isDead: boolean = false;
 
   private actionPointsUsed: number = 0;
 
@@ -30,7 +31,8 @@ export class Character {
       stunDamage: this.stunDamage,
       physicalDamage: this.physicalDamage,
       initiativeDice: this.initiativeDice,
-      hasCounterStrike: this.hasCounterStrike
+      hasCounterStrike: this.hasCounterStrike,
+      isDead: this.isDead
     };
   }
 
@@ -85,7 +87,8 @@ export class Character {
     stunDamage: number = 0,
     physicalDamage: number = 0,
     initiativeDice: number = 0,
-    hasCounterStrike: boolean = false
+    hasCounterStrike: boolean = false,
+    isDead: boolean = false
   ) {
     this.id = id;
     this.name = name;
@@ -94,6 +97,7 @@ export class Character {
     this.physicalDamage = physicalDamage;
     this.initiativeDice = initiativeDice;
     this.hasCounterStrike = hasCounterStrike;
+    this.isDead = isDead;
     this.rollDice();
   }
 
@@ -127,5 +131,8 @@ export class Character {
       this.actionPointsUsed = 0;
       this.rollDice();
     }
+  }
+  kill() {
+    this.isDead = true;
   }
 }

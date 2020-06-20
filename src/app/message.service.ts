@@ -9,8 +9,8 @@ export class MessageService {
 
   add(message: string) {
     this.messages.push(message);
-    // remove after 5 seconds
-    setTimeout(() => this.remove(this.messages.length -1), 5000);
+    // remove after 10 seconds
+    setTimeout(() => this.remove(this.messages.length -1), 10000);
   }
 
   removeDiceRollMessage(id) {
@@ -35,7 +35,7 @@ export class MessageService {
       name: characterName,
       rolls: roll
     });
-    // remove after 5 seconds
-    setTimeout(() => this.removeDiceRollMessage(this.diceRolls.length -1), 5000);
+    // remove after 10 seconds
+    setTimeout(() => this.removeDiceRollMessage(this.diceRolls.length -1), 10000);
   }
 }
